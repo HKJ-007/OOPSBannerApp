@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
@@ -6,9 +9,9 @@ public class OOPSBannerApp {
 
         CharacterPatternMap patternMap = new CharacterPatternMap();
 
-        // Store pattern for each letter
         String[][] letters = new String[word.length()][];
 
+        // Retrieve patterns using Map
         for (int i = 0; i < word.length(); i++) {
             letters[i] = patternMap.getPattern(word.charAt(i));
         }
@@ -22,49 +25,48 @@ public class OOPSBannerApp {
         }
     }
 
-    // Static Inner Class
+    // Static Inner Class with Map
     static class CharacterPatternMap {
 
+        private Map<Character, String[]> patternMap;
+
+        public CharacterPatternMap() {
+
+            patternMap = new HashMap<>();
+
+            patternMap.put('O', new String[]{
+                    " ***** ",
+                    "*     *",
+                    "*     *",
+                    "*     *",
+                    " ***** "
+            });
+
+            patternMap.put('P', new String[]{
+                    " ***** ",
+                    "*     *",
+                    " ***** ",
+                    "*      ",
+                    "*      "
+            });
+
+            patternMap.put('S', new String[]{
+                    " ***** ",
+                    "*      ",
+                    " ***** ",
+                    "      *",
+                    " ***** "
+            });
+        }
+
         public String[] getPattern(char ch) {
-
-            switch (ch) {
-
-                case 'O':
-                    return new String[]{
-                            " ***** ",
-                            "*     *",
-                            "*     *",
-                            "*     *",
-                            " ***** "
-                    };
-
-                case 'P':
-                    return new String[]{
-                            " ***** ",
-                            "*     *",
-                            " ***** ",
-                            "*      ",
-                            "*      "
-                    };
-
-                case 'S':
-                    return new String[]{
-                            " ***** ",
-                            "*      ",
-                            " ***** ",
-                            "      *",
-                            " ***** "
-                    };
-
-                default:
-                    return new String[]{
-                            "       ",
-                            "       ",
-                            "       ",
-                            "       ",
-                            "       "
-                    };
-            }
+            return patternMap.getOrDefault(ch, new String[]{
+                    "       ",
+                    "       ",
+                    "       ",
+                    "       ",
+                    "       "
+            });
         }
     }
 }
