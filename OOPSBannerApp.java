@@ -2,47 +2,69 @@ public class OOPSBannerApp {
 
     public static void main(String[] args) {
 
-        String[] O1 = getO();
-        String[] O2 = getO();
-        String[] P  = getP();
-        String[] S  = getS();
+        String word = "OOPS";
 
-        
-        for (int i = 0; i < O1.length; i++) {
-            System.out.println(O1[i] + "   " + O2[i] + "   " + P[i] + "   " + S[i]);
+        CharacterPatternMap patternMap = new CharacterPatternMap();
+
+        // Store pattern for each letter
+        String[][] letters = new String[word.length()][];
+
+        for (int i = 0; i < word.length(); i++) {
+            letters[i] = patternMap.getPattern(word.charAt(i));
+        }
+
+        // Print banner row by row
+        for (int row = 0; row < letters[0].length; row++) {
+            for (int col = 0; col < letters.length; col++) {
+                System.out.print(letters[col][row] + "   ");
+            }
+            System.out.println();
         }
     }
 
-    
-    public static String[] getO() {
-        return new String[]{
-                " ***** ",
-                "*     *",
-                "*     *",
-                "*     *",
-                " ***** "
-        };
-    }
+    // Static Inner Class
+    static class CharacterPatternMap {
 
-    // Static method for P
-    public static String[] getP() {
-        return new String[]{
-                " ***** ",
-                "*     *",
-                " ***** ",
-                "*      ",
-                "*      "
-        };
-    }
+        public String[] getPattern(char ch) {
 
-    // Static method for S
-    public static String[] getS() {
-        return new String[]{
-                " ***** ",
-                "*      ",
-                " ***** ",
-                "      *",
-                " ***** "
-        };
+            switch (ch) {
+
+                case 'O':
+                    return new String[]{
+                            " ***** ",
+                            "*     *",
+                            "*     *",
+                            "*     *",
+                            " ***** "
+                    };
+
+                case 'P':
+                    return new String[]{
+                            " ***** ",
+                            "*     *",
+                            " ***** ",
+                            "*      ",
+                            "*      "
+                    };
+
+                case 'S':
+                    return new String[]{
+                            " ***** ",
+                            "*      ",
+                            " ***** ",
+                            "      *",
+                            " ***** "
+                    };
+
+                default:
+                    return new String[]{
+                            "       ",
+                            "       ",
+                            "       ",
+                            "       ",
+                            "       "
+                    };
+            }
+        }
     }
 }
